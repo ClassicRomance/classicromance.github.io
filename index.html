@@ -44,7 +44,7 @@
       padding-bottom: 60px;
     }
 
-    /* ===== HERO SECTION - REDUCED SPACING ===== */
+    /* ===== HERO SECTION ===== */
     .hero {
       text-align: center;
       padding: 60px 20px 25px;
@@ -61,7 +61,6 @@
       background-clip: text;
       letter-spacing: -1px;
       line-height: 1.2;
-      text-transform: none;
     }
     
     .hero-btn {
@@ -86,7 +85,7 @@
       box-shadow: 0 12px 40px rgba(0, 132, 255, 0.6);
     }
 
-    /* ===== PROFILES GRID - REDUCED TOP MARGIN ===== */
+    /* ===== PROFILES GRID ===== */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -149,7 +148,6 @@
       background: linear-gradient(135deg, #1a1a1a, #252525);
     }
     
-    /* ===== SMOOTH FADE-IN FOR IMAGES ===== */
     .profile-img {
       width: 100%;
       height: 520px;
@@ -167,7 +165,6 @@
       transform: scale(1);
     }
     
-    /* ===== SHIMMER PLACEHOLDER ===== */
     .profile-img::before {
       content: '';
       position: absolute;
@@ -215,7 +212,6 @@
       50% { opacity: 0.4; }
     }
     
-    /* ===== BLUE CARD BOTTOM ===== */
     .profile-info {
       padding: 25px 20px;
       text-align: center;
@@ -294,19 +290,19 @@
       box-shadow: 0 8px 30px var(--accent-glow);
     }
 
-    /* ===== TRUST BADGE - REDUCED BOTTOM MARGIN ===== */
+    /* ===== TRUST BADGE - MINIMAL SPACING ===== */
     .trust-section {
       text-align: center;
-      padding: 20px 20px 15px;
+      padding: 15px 20px 0;
       color: var(--text-muted);
       font-size: 0.85rem;
-      margin-top: 15px;
-      margin-bottom: 15px;
+      margin-top: 10px;
+      margin-bottom: 0;
     }
 
-    /* ===== TESTIMONIALS - REDUCED TOP PADDING ===== */
+    /* ===== TESTIMONIALS - MINIMAL TOP PADDING ===== */
     .testimonials-section {
-      padding: 40px 20px 60px;
+      padding: 10px 20px 60px;
       background: linear-gradient(180deg, transparent, rgba(0, 132, 255, 0.05), transparent);
     }
     
@@ -647,7 +643,7 @@
   <!-- ===== SCRIPTS ===== -->
   <script>
     // ⚠️ REPLACE WITH YOUR AFFILIATE LINK!
-    const AFFILIATE_LINK = 'https://go.cm-trk6.com/aff_f?h=eDZiB9';
+    const AFFILIATE_LINK = 'https://your-tracker.com/click?sub1={click_id}';
     
     const modal = document.getElementById('confirmModal');
     const modalImg = document.getElementById('modalImg');
@@ -765,7 +761,6 @@
       renderRandomProfiles();
       prepareAffiliateLink();
       
-      // Fade-in for testimonial avatars
       document.querySelectorAll('.testimonial-avatar').forEach(setupImageFadeIn);
     });
 
