@@ -10,7 +10,7 @@
   <link rel="preload" as="image" href="images/girl2.jpg">
   <link rel="preload" as="image" href="images/girl3.jpg">
   
-  <!-- ===== GOOGLE FONTS - PREMIUM SANS-SERIF ===== -->
+  <!-- ===== GOOGLE FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -290,7 +290,7 @@
       box-shadow: 0 8px 30px var(--accent-glow);
     }
 
-    /* ===== TRUST BADGE - MINIMAL SPACING ===== */
+    /* ===== TRUST BADGE ===== */
     .trust-section {
       text-align: center;
       padding: 15px 20px 0;
@@ -300,7 +300,7 @@
       margin-bottom: 0;
     }
 
-    /* ===== TESTIMONIALS - MINIMAL TOP PADDING ===== */
+    /* ===== TESTIMONIALS ===== */
     .testimonials-section {
       padding: 10px 20px 60px;
       background: linear-gradient(180deg, transparent, rgba(0, 132, 255, 0.05), transparent);
@@ -561,7 +561,7 @@
     </div>
   </div>
 
-  <!-- ===== TESTIMONIALS (MALE) ===== -->
+  <!-- ===== TESTIMONIALS ===== -->
   <section class="testimonials-section">
     <div class="container">
       <h2 class="section-title">What Our Members Say</h2>
@@ -648,7 +648,7 @@
     const mainCta = document.getElementById('mainCta');
     const moreProfilesBtn = document.getElementById('moreProfilesBtn');
     
-    // ===== PROFILES DATABASE (30 PHOTOS) =====
+    // ===== PROFILE DATABASE (87 PHOTOS) - US CITIES =====
     const allProfiles = [
       { name: 'Jessica', age: 42, city: 'New York, NY', img: 'girl1.jpg' },
       { name: 'Amanda', age: 48, city: 'Los Angeles, CA', img: 'girl2.jpg' },
@@ -679,7 +679,64 @@
       { name: 'Katherine', age: 48, city: 'Las Vegas, NV', img: 'girl27.jpg' },
       { name: 'Christine', age: 51, city: 'Louisville, KY', img: 'girl28.jpg' },
       { name: 'Debra', age: 47, city: 'Baltimore, MD', img: 'girl29.jpg' },
-      { name: 'Rachel', age: 50, city: 'Milwaukee, WI', img: 'girl30.jpg' }
+      { name: 'Rachel', age: 50, city: 'Milwaukee, WI', img: 'girl30.jpg' },
+      { name: 'Rebecca', age: 46, city: 'Albuquerque, NM', img: 'girl31.jpg' },
+      { name: 'Virginia', age: 52, city: 'Tucson, AZ', img: 'girl32.jpg' },
+      { name: 'Catherine', age: 49, city: 'Fresno, CA', img: 'girl33.jpg' },
+      { name: 'Janet', age: 54, city: 'Sacramento, CA', img: 'girl34.jpg' },
+      { name: 'Carolyn', age: 47, city: 'Kansas City, MO', img: 'girl35.jpg' },
+      { name: 'Maria', age: 51, city: 'Mesa, AZ', img: 'girl36.jpg' },
+      { name: 'Heather', age: 48, city: 'Virginia Beach, VA', img: 'girl37.jpg' },
+      { name: 'Diane', age: 53, city: 'Atlanta, GA', img: 'girl38.jpg' },
+      { name: 'Julie', age: 45, city: 'Colorado Springs, CO', img: 'girl39.jpg' },
+      { name: 'Joyce', age: 50, city: 'Raleigh, NC', img: 'girl40.jpg' },
+      { name: 'Evelyn', age: 46, city: 'Omaha, NE', img: 'girl41.jpg' },
+      { name: 'Frances', age: 52, city: 'Miami, FL', img: 'girl42.jpg' },
+      { name: 'Gloria', age: 49, city: 'Oakland, CA', img: 'girl43.jpg' },
+      { name: 'Cheryl', age: 54, city: 'Minneapolis, MN', img: 'girl44.jpg' },
+      { name: 'Megan', age: 47, city: 'Tulsa, OK', img: 'girl45.jpg' },
+      { name: 'Andrea', age: 51, city: 'Cleveland, OH', img: 'girl46.jpg' },
+      { name: 'Hannah', age: 48, city: 'Wichita, KS', img: 'girl47.jpg' },
+      { name: 'Jacqueline', age: 53, city: 'Arlington, TX', img: 'girl48.jpg' },
+      { name: 'Martha', age: 45, city: 'New Orleans, LA', img: 'girl49.jpg' },
+      { name: 'Judith', age: 50, city: 'Bakersfield, CA', img: 'girl50.jpg' },
+      { name: 'Stephanie', age: 46, city: 'Tampa, FL', img: 'girl51.jpg' },
+      { name: 'Victoria', age: 52, city: 'Honolulu, HI', img: 'girl52.jpg' },
+      { name: 'Kelly', age: 49, city: 'Anaheim, CA', img: 'girl53.jpg' },
+      { name: 'Lauren', age: 54, city: 'Aurora, CO', img: 'girl54.jpg' },
+      { name: 'Christina', age: 47, city: 'Santa Ana, CA', img: 'girl55.jpg' },
+      { name: 'Joan', age: 51, city: 'St. Louis, MO', img: 'girl56.jpg' },
+      { name: 'Eleanor', age: 48, city: 'Riverside, CA', img: 'girl57.jpg' },
+      { name: 'Kathryn', age: 53, city: 'Corpus Christi, TX', img: 'girl58.jpg' },
+      { name: 'Ann', age: 45, city: 'Lexington, KY', img: 'girl59.jpg' },
+      { name: 'Jean', age: 50, city: 'Pittsburgh, PA', img: 'girl60.jpg' },
+      { name: 'Alice', age: 46, city: 'Anchorage, AK', img: 'girl61.jpg' },
+      { name: 'Doris', age: 52, city: 'Stockton, CA', img: 'girl62.jpg' },
+      { name: 'Madison', age: 49, city: 'Cincinnati, OH', img: 'girl63.jpg' },
+      { name: 'Julia', age: 54, city: 'St. Paul, MN', img: 'girl64.jpg' },
+      { name: 'Judy', age: 47, city: 'Toledo, OH', img: 'girl65.jpg' },
+      { name: 'Grace', age: 51, city: 'Newark, NJ', img: 'girl66.jpg' },
+      { name: 'Denise', age: 48, city: 'Greensboro, NC', img: 'girl67.jpg' },
+      { name: 'Amber', age: 53, city: 'Plano, TX', img: 'girl68.jpg' },
+      { name: 'Marilyn', age: 45, city: 'Henderson, NV', img: 'girl69.jpg' },
+      { name: 'Beverly', age: 50, city: 'Lincoln, NE', img: 'girl70.jpg' },
+      { name: 'Danielle', age: 46, city: 'Buffalo, NY', img: 'girl71.jpg' },
+      { name: 'Theresa', age: 52, city: 'Fort Wayne, IN', img: 'girl72.jpg' },
+      { name: 'Abigail', age: 49, city: 'Jersey City, NJ', img: 'girl73.jpg' },
+      { name: 'Brittany', age: 54, city: 'Chula Vista, CA', img: 'girl74.jpg' },
+      { name: 'Diana', age: 47, city: 'Orlando, FL', img: 'girl75.jpg' },
+      { name: 'Natalie', age: 51, city: 'St. Petersburg, FL', img: 'girl76.jpg' },
+      { name: 'Olivia', age: 48, city: 'Norfolk, VA', img: 'girl77.jpg' },
+      { name: 'Marie', age: 53, city: 'Chandler, AZ', img: 'girl78.jpg' },
+      { name: 'Kayla', age: 45, city: 'Laredo, TX', img: 'girl79.jpg' },
+      { name: 'Alexis', age: 50, city: 'Madison, WI', img: 'girl80.jpg' },
+      { name: 'Lori', age: 46, city: 'Durham, NC', img: 'girl81.jpg' },
+      { name: 'Tiffany', age: 52, city: 'Lubbock, TX', img: 'girl82.jpg' },
+      { name: 'Sophia', age: 49, city: 'Winston-Salem, NC', img: 'girl83.jpg' },
+      { name: 'Rose', age: 54, city: 'Garland, TX', img: 'girl84.jpg' },
+      { name: 'Isabella', age: 47, city: 'Glendale, AZ', img: 'girl85.jpg' },
+      { name: 'Hazel', age: 51, city: 'Hialeah, FL', img: 'girl86.jpg' },
+      { name: 'Charlotte', age: 48, city: 'Reno, NV', img: 'girl87.jpg' }
     ];
 
     // ===== GET UNIQUE RANDOM PROFILES =====
