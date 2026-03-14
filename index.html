@@ -30,7 +30,7 @@
       --shadow-green: 0 10px 50px rgba(0, 200, 83, 0.25);
       --radius: 20px;
       --font-heading: 'Inter', sans-serif;
-      --alert-red: #ff3333; /* Красный для индикаторов */
+      --alert-red: #ff3333; /* Красный цвет для индикаторов */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,7 +53,7 @@
       align-items: center;
       justify-content: center;
       
-      /* Центрирование через Flexbox */
+      /* Для выравнивания через flexbox */
       height: auto; 
     }
     
@@ -271,7 +271,16 @@
       box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
     }
 
-    /* ===== NEW INSTRUCTIONS STYLES ===== */
+    /* ===== NEW INSTRUCTION STYLES (FIXED LAYOUT) ===== */
+    /* Контейнер для стрелки, кнопки и текста */
+    .tap-actions-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px; /* Расстояние между элементами */
+    }
+    
+    /* Стрелочка */
     .tap-arrow-svg {
       width: 24px;
       height: 24px;
@@ -280,18 +289,49 @@
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
-      margin-bottom: 5px;
+      filter: drop-shadow(0 2px 2px rgba(255, 51, 51, 0.4));
+      flex-shrink: 0;
     }
     
-    .tap-instruction {
+    .profile-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .tap-instruction-text {
       color: var(--alert-red) !important;
       font-size: 0.85rem;
-      font-weight: bold;
+      font-weight: 900; /* Жирный */
+      font-style: normal; /* Ровный */
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-align: center;
+      /* Шрифт без засечек */
+      font-family: Arial, Helvetica, sans-serif; 
       margin-top: 4px;
     }
 
+    /* ===== HERO INSTRUCTIONS ===== */
+    .hero-tap-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .hero-tap-arrow {
+       width: 28px;
+       height: 28px;
+       stroke: var(--alert-red);
+       stroke-width: 3;
+       fill: none;
+       stroke-linecap: round;
+       stroke-linejoin: round;
+       filter: drop-shadow(0 2px 2px rgba(255, 51, 51, 0.4));
+    }
+    
     .more-profiles { text-align: center; margin: 45px 0 25px; }
     
     .more-btn {
@@ -566,7 +606,9 @@
   <!-- ===== HERO ===== -->
   <section class="hero">
     <h1>Find Your Perfect Match Near You</h1>
-    <a href="#profiles" class="hero-btn" id="mainCta">Second Chance</a>
+    <div id="mainHeroSection" style="display:flex; flex-direction:column; align-items:center;">
+      <a href="#profiles" class="hero-btn" id="mainCta">Second Chance</a>
+    </div>
   </section>
 
   <!-- ===== PROFILES ===== -->
@@ -674,6 +716,7 @@
     const modalContinue = document.getElementById('modalContinue');
     const mainCta = document.getElementById('mainCta');
     const moreProfilesBtn = document.getElementById('moreProfilesBtn');
+    const mainHeroSection = document.getElementById('mainHeroSection');
     
     // ===== PROFILE DATABASE (87 PHOTOS) - US CITIES =====
     const allProfiles = [
@@ -806,9 +849,14 @@
       let actionButtonHtml = '';
       if (isIOS) {
          actionButtonHtml = `
-           <svg class="tap-arrow-svg" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-           <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
-           <span class="tap-instruction">Press and hold finger!</span>
+           <div class="tap-actions-container">
+             <!-- SVG Arrow Icon -->
+             <svg class="tap-arrow-svg" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+             
+             <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+             
+             <span class="tap-instruction-text">PRESS AND HOLD FINGER!</span>
+           </div>
          `;
       } else {
          // Standard button for others (Android/Web)
@@ -880,6 +928,29 @@
       // Fix: Clean up link (remove trailing spaces if any)
       const cleanLink = finalLink.trim();
       
+      // Add Hero Instructions ONLY if iOS
+      const needsIndicator = window.isIOSAppForLinks();
+      if(needsIndicator) {
+         
+         // STRAR ABOVE BUTTON
+         const arrowIcon = `<svg class="hero-tap-arrow" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
+         
+         // INSERT BEFORE BUTTON
+         mainHeroSection.insertBefore(document.createRange().createContextualFragment(arrowIcon), mainCta);
+         
+         // TEXT BELOW BUTTON
+         const textLabel = document.createElement("div");
+         textLabel.className = "tap-instruction-text";
+         textLabel.textContent = "PRESS AND HOLD FINGER!"; // Можно использовать заглавные буквы
+         textLabel.style.marginTop = "10px";
+         textLabel.style.marginBottom = "10px";
+         textLabel.style.textAlign = "center";
+         textLabel.style.width = "100%"; // Убедитесь, что он центрируется полностью
+         
+         // INSERT AFTER BUTTON
+         mainHeroSection.insertBefore(textLabel, mainCta.nextSibling);
+      }
+
       modalContinue.onclick = () => {
         trackClick('modal_continue');
         window.location.href = cleanLink;
