@@ -249,8 +249,9 @@
       font-weight: 500;
     }
     
-    .profile-btn {
-      display: inline-block;
+    /* Стили для кнопки-ссылки */
+    .profile-link {
+      display: block !important; /* Принудительно делаем блоком */
       padding: 12px 35px;
       background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
@@ -264,9 +265,12 @@
       transition: all 0.3s ease;
       font-family: var(--font-body);
       letter-spacing: -0.2px;
+      text-align: center;
+      width: 100%; /* На всю ширину контейнера */
+      box-sizing: border-box; /* Чтобы padding не ломал ширину */
     }
     
-    .profile-btn:hover {
+    .profile-link:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
     }
@@ -834,7 +838,7 @@
     }
 
     // ===== CREATE PROFILE CARD =====
-    function createProfileCard(profile, index) {
+    function createProfileCard(profile, index, finalLink) {
       const card = document.createElement('div');
       card.className = 'profile-card';
       card.setAttribute('data-name', `${profile.name}, ${profile.age}`);
@@ -853,15 +857,16 @@
              <!-- SVG Arrow Icon -->
              <svg class="tap-arrow-svg" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
              
-             <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+             <!-- Changed from button to anchor tag -->
+             <a href="${finalLink}" class="profile-link" rel="noopener noreferrer">View Profile</a>
              
              <span class="tap-instruction-text">PRESS AND HOLD FINGER!</span>
            </div>
          `;
       } else {
-         // Standard button for others (Android/Web)
+         // Standard button/link for others (Android/Web)
          actionButtonHtml = `
-           <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+           <a href="${finalLink}" class="profile-link" rel="noopener noreferrer">View Profile</a>
          `;
       }
 
@@ -881,8 +886,10 @@
       const img = card.querySelector('.profile-img');
       setupImageFadeIn(img);
       
+      // Клик по карточке больше не нужен для модалки, так как мы ведем прямо на оффер.
+      // Но если хотим оставить модалку для просмотра аватарки перед переходом, можно добавить логику ниже
       card.addEventListener('click', (e) => {
-        if (!e.target.closest('.profile-btn')) {
+        if (!e.target.closest('.profile-link')) {
           openModal(`${profile.name}, ${profile.age}`, `images/${profile.img}`);
         }
       });
@@ -895,10 +902,13 @@
       const grid = document.getElementById('profilesGrid');
       grid.innerHTML = '';
       
+      const clickId = getClickId() || 'default';
+      const cleanLink = AFFILIATE_LINK.replace('{click_id}', clickId).trim();
+      
       const selectedProfiles = getRandomUniqueProfiles(6);
       
       selectedProfiles.forEach((profile, index) => {
-        const card = createProfileCard(profile, index);
+        const card = createProfileCard(profile, index, cleanLink);
         grid.appendChild(card);
       });
     }
@@ -924,8 +934,6 @@
     function prepareAffiliateLink() {
       const clickId = getClickId() || 'default';
       const finalLink = AFFILIATE_LINK.replace('{click_id}', clickId);
-      
-      // Fix: Clean up link (remove trailing spaces if any)
       const cleanLink = finalLink.trim();
       
       // Add Hero Instructions ONLY if iOS
