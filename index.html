@@ -16,45 +16,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ===== DARK COLOR PALETTE WITH GREEN ACCENT ===== */
+    /* ===== COLORS FROM OLD VERSION (BLUE THEME) ===== */
     :root {
       --bg-dark: #0a0a0a;
       --bg-card: #1a1a1a;
       --bg-card-hover: #252525;
       
-      /* Green Accent */
-      --accent-green: #00c853;
-      --accent-green-dark: #00a844;
-      --accent-glow: rgba(0, 200, 83, 0.3);
+      /* Blue Palette */
+      --accent-blue: #0084ff;
+      --accent-blue-dark: #0066cc;
+      --accent-blue-light: #4da6ff;
+      --accent-glow: rgba(0, 132, 255, 0.3);
       
-      /* Text Colors */
       --text-main: #ffffff;
       --text-muted: #b0b0b0;
       
-      /* Blue for Profile Info Bottom Area */
-      --blue-info-start: #1e3a8a; /* Dark blue start */
-      --blue-info-end: #172554;   /* Very dark blue end */
-      
-      /* Success/Shadows */
+      /* Success/Green for Online Badge */
       --success: #00c853;
-      --shadow-green: 0 10px 50px rgba(0, 200, 83, 0.25);
       
+      --shadow-blue: 0 10px 50px rgba(0, 132, 255, 0.25);
       --radius: 20px;
       --font-heading: 'Inter', sans-serif;
-      --alert-red: #ff3333;
+      --alert-red: #ff3333; /* For iOS indicators */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: var(--font-body);
-      background: linear-gradient(180deg, #050505 0%, #0a0a0a 40%, #0d1117 100%);
+      background: linear-gradient(180deg, #0a0a0a 0%, #121212 50%, #0a0a0a 100%);
       color: var(--text-main);
       min-height: 100vh;
       padding-bottom: 60px;
     }
 
-    /* ===== HERO SECTION (CENTERED FIX) ===== */
+    /* ===== HERO SECTION ===== */
     .hero {
       text-align: center;
       padding: 60px 20px 25px;
@@ -62,8 +58,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: auto; 
     }
     
     .hero h1 {
@@ -71,7 +65,7 @@
       font-size: 2.8rem;
       font-weight: 800;
       margin-bottom: 25px;
-      background: linear-gradient(135deg, #ffffff 0%, var(--accent-green) 100%);
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-blue-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -85,7 +79,7 @@
     .hero-btn {
       display: inline-block;
       padding: 16px 48px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
       color: white;
       font-weight: 700;
       font-size: 1.05rem;
@@ -101,7 +95,7 @@
     
     .hero-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0, 200, 83, 0.6);
+      box-shadow: 0 12px 40px rgba(0, 132, 255, 0.6);
     }
 
     /* ===== PROFILES GRID ===== */
@@ -135,7 +129,7 @@
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      border: 1px solid rgba(0, 200, 83, 0.15);
+      border: 1px solid rgba(0, 132, 255, 0.15);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
     
@@ -156,8 +150,8 @@
     
     .profile-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-green);
-      border-color: var(--success);
+      box-shadow: var(--shadow-blue);
+      border-color: var(--accent-blue);
     }
     
     .profile-img-container {
@@ -231,64 +225,39 @@
       50% { opacity: 0.4; }
     }
     
-    /* ИЗМЕНЕНИЕ СТИЛЯ ДЛЯ НИЗА КАРТОЧКИ (Синий фон) */
+    /* CHANGED: Blue Gradient Bottom for Profile Info */
     .profile-info {
       padding: 25px 20px;
       text-align: center;
       position: relative;
       z-index: 1;
-      background: linear-gradient(135deg, var(--blue-info-start), var(--blue-info-end)); /* Синий градиент */
-      border-top: 1px solid rgba(59, 130, 246, 0.3); /* Тонкая синяя граница сверху */
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .profile-name {
       font-family: var(--font-heading);
       font-weight: 700;
       font-size: 1.4rem;
-      color: #ffffff;
+      color: white;
       margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
       letter-spacing: -0.3px;
     }
     
     .profile-meta {
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.95);
       font-size: 0.95rem;
       margin-bottom: 18px;
       font-weight: 500;
     }
     
-    /* ===== STYLES FOR IOS LINKS (Full Width Green Button) ===== */
-    .ios-tap-link {
-      display: block !important;
-      padding: 12px 35px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark)) !important;
-      color: white !important;
-      font-weight: 700 !important;
-      font-size: 0.95rem !important;
-      border: none !important;
-      border-radius: 25px !important;
-      cursor: pointer !important;
-      text-decoration: none !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-      transition: all 0.3s ease !important;
-      font-family: var(--font-body) !important;
-      letter-spacing: -0.2px !important;
-      text-align: center !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    
-    .ios-tap-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5) !important;
-    }
-    
-    /* ===== STYLES FOR ANDROID/BROWSER BUTTONS (Same Green Style) ===== */
-    .standard-btn {
+    /* CHANGED: White Button with Blue Text */
+    .profile-btn {
       display: inline-block;
       padding: 12px 35px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
-      color: white;
+      background: white;
+      color: var(--accent-blue-dark);
       font-weight: 700;
       font-size: 0.95rem;
       border: none;
@@ -299,15 +268,15 @@
       transition: all 0.3s ease;
       font-family: var(--font-body);
       letter-spacing: -0.2px;
-      text-align: center;
     }
     
-    .standard-btn:hover {
+    .profile-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      background: #f5f5f5;
     }
-    
-    /* ===== NEW INSTRUCTION STYLES ===== */
+
+    /* ===== IOS INSTRUCTION STYLES ===== */
     .tap-actions-container {
       display: flex;
       flex-direction: column;
@@ -340,7 +309,6 @@
       margin-top: 4px;
     }
 
-    /* ===== BUTTONS STYLING ===== */
     .hero-tap-arrow {
        width: 28px;
        height: 28px;
@@ -352,17 +320,36 @@
        filter: drop-shadow(0 2px 2px rgba(255, 51, 51, 0.4));
        margin-bottom: 10px;
     }
-    
+
+    .ios-tap-link {
+       display: inline-block !important;
+       padding: 12px 35px !important;
+       background: white !important;
+       color: var(--accent-blue-dark) !important;
+       font-weight: 700 !important;
+       font-size: 0.95rem !important;
+       border: none !important;
+       border-radius: 25px !important;
+       cursor: pointer !important;
+       text-decoration: none !important;
+       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+       transition: all 0.3s ease !important;
+       font-family: var(--font-body) !important;
+       letter-spacing: -0.2px !important;
+       text-align: center !important;
+    }
+
+    /* ===== MORE BUTTONS ===== */
     .more-profiles { text-align: center; margin: 45px 0 25px; display: flex; flex-direction: column; align-items: center;}
     
     .more-btn {
       display: inline-block;
       padding: 16px 50px;
       background: transparent;
-      color: var(--accent-green);
+      color: var(--accent-blue);
       font-weight: 700;
       font-size: 1.05rem;
-      border: 2px solid var(--accent-green);
+      border: 2px solid var(--accent-blue);
       border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
@@ -372,7 +359,7 @@
     }
     
     .more-btn:hover {
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
       color: white;
       transform: translateY(-3px);
       box-shadow: 0 8px 30px var(--accent-glow);
@@ -391,7 +378,7 @@
     /* ===== TESTIMONIALS ===== */
     .testimonials-section {
       padding: 10px 20px 60px;
-      background: linear-gradient(180deg, transparent, rgba(0, 200, 83, 0.05), transparent);
+      background: linear-gradient(180deg, transparent, rgba(0, 132, 255, 0.05), transparent);
     }
     
     .testimonials-grid {
@@ -405,15 +392,15 @@
       background: var(--bg-card);
       border-radius: var(--radius);
       padding: 30px;
-      border: 1px solid rgba(0, 200, 83, 0.15);
+      border: 1px solid rgba(0, 132, 255, 0.15);
       transition: all 0.3s ease;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
     
     .testimonial-card:hover {
-      border-color: var(--success);
+      border-color: var(--accent-blue);
       transform: translateY(-5px);
-      box-shadow: var(--shadow-green);
+      box-shadow: var(--shadow-blue);
     }
     
     .testimonial-header {
@@ -429,7 +416,7 @@
       border-radius: 50%;
       object-fit: cover;
       object-position: top;
-      border: 3px solid var(--success);
+      border: 3px solid var(--accent-blue);
       flex-shrink: 0;
       opacity: 0;
       transition: opacity 0.4s ease;
@@ -506,7 +493,7 @@
       max-width: 450px;
       width: 100%;
       text-align: center;
-      border: 2px solid var(--success);
+      border: 2px solid var(--accent-blue);
       box-shadow: 0 10px 50px var(--accent-glow);
       animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -522,7 +509,7 @@
       object-fit: cover;
       object-position: top;
       margin: 0 auto 25px;
-      border: 4px solid var(--success);
+      border: 4px solid var(--accent-blue);
       box-shadow: 0 5px 25px var(--accent-glow);
       opacity: 0;
       transition: opacity 0.4s ease;
@@ -551,7 +538,7 @@
     .modal-btn {
       width: 100%;
       padding: 18px;
-      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
       color: white;
       font-weight: 700;
       border: none;
@@ -565,7 +552,7 @@
     }
     
     .modal-btn:hover {
-      box-shadow: 0 8px 30px rgba(0, 200, 83, 0.6);
+      box-shadow: 0 8px 30px rgba(0, 132, 255, 0.6);
       transform: translateY(-2px);
     }
 
@@ -576,12 +563,12 @@
       color: var(--text-muted);
       font-size: 0.75rem;
       line-height: 1.6;
-      border-top: 1px solid rgba(0, 200, 83, 0.1);
+      border-top: 1px solid rgba(0, 132, 255, 0.1);
       margin-top: 40px;
     }
     
     footer a {
-      color: var(--success);
+      color: var(--accent-blue);
       text-decoration: none;
       margin: 0 6px;
     }
@@ -883,7 +870,7 @@
       } else {
          // Standard button/link for others (Android/Web)
          actionButtonHtml = `
-           <button class="standard-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+           <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
          `;
       }
 
@@ -904,7 +891,7 @@
       setupImageFadeIn(img);
       
       card.addEventListener('click', (e) => {
-        if (!e.target.closest('.ios-tap-link') && !e.target.closest('.standard-btn')) {
+        if (!e.target.closest('.ios-tap-link') && !e.target.closest('.profile-btn')) {
           openModal(`${profile.name}, ${profile.age}`, `images/${profile.img}`);
         }
       });
