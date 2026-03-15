@@ -616,7 +616,7 @@
   <section class="hero">
     <h1>Find Your Perfect Match Near You</h1>
     <div id="mainHeroSection" style="display:flex; flex-direction:column; align-items:center;">
-      <a href="#profiles" class="hero-btn" id="mainCta">Second Chance</a>
+      <a href="#" class="hero-btn" id="mainCta">Second Chance</a>
     </div>
   </section>
 
@@ -940,9 +940,10 @@
       const cleanLink = finalLink.trim();
       
       const needsIndicator = window.isIOSAppForLinks();
+      
+      // Configure Top Button
       if(needsIndicator) {
-         
-         // TOP BUTTON
+         // iOS: Add arrow/text and link directly
          const topArrowIcon = `<svg class="hero-tap-arrow" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
          const topTextLabel = document.createElement("div");
          topTextLabel.className = "tap-instruction-text";
@@ -954,10 +955,19 @@
          mainHeroSection.insertBefore(document.createRange().createContextualFragment(topArrowIcon), mainCta);
          mainHeroSection.insertBefore(topTextLabel, mainCta.nextSibling);
          mainCta.href = cleanLink;
+         mainCta.onclick = null; // Clear any previous onclicks
+      } else {
+         // Android/Web: Trigger modal instead of link
+         mainCta.href = "#";
+         mainCta.onclick = (e) => {
+           e.preventDefault();
+           showGenericModal("Start Finding Matches!");
+         };
       }
 
-      // BOTTOM BUTTON
+      // Configure Bottom Button
       if(needsIndicator) {
+         // iOS: Add arrow/text and link directly
          const bottomArrowIcon = `<svg class="hero-tap-arrow" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
          const bottomTextLabel = document.createElement("div");
          bottomTextLabel.className = "tap-instruction-text";
@@ -969,15 +979,29 @@
          moreProfilesWrapper.insertBefore(document.createRange().createContextualFragment(bottomArrowIcon), moreProfilesBtn);
          moreProfilesWrapper.insertBefore(bottomTextLabel, moreProfilesBtn.nextSibling);
          moreProfilesBtn.href = cleanLink;
+         moreProfilesBtn.onclick = null; // Clear any previous onclicks
       } else {
-          mainCta.href = cleanLink;
-          moreProfilesBtn.href = cleanLink;
+         // Android/Web: Trigger modal instead of link
+         moreProfilesBtn.href = "#";
+         moreProfilesBtn.onclick = (e) => {
+           e.preventDefault();
+           showGenericModal("Discover More Singles!");
+         };
       }
 
+      // Modal Continue Handler (Redirects for everyone)
       modalContinue.onclick = () => {
         trackClick('modal_continue');
         window.location.href = cleanLink;
       };
+    }
+
+    // Generic Modal Function for Buttons
+    function showGenericModal(titleText) {
+        modalTitle.textContent = titleText;
+        modalImg.style.display = 'none'; // Hide image for generic buttons
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
     function getClickId() {
