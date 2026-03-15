@@ -16,45 +16,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
-    /* ===== NEW BLUE & CUTE THEME ===== */
+    /* ===== DARK COLOR PALETTE WITH GREEN ACCENT ===== */
     :root {
-      /* Light Blue Palette */
-      --bg-dark: #f0f9ff;        /* Very light sky blue background */
-      --bg-card: #ffffff;        /* White cards */
-      --bg-card-hover: #f8fafc;  /* Slightly darker hover */
+      --bg-dark: #0a0a0a;
+      --bg-card: #1a1a1a;
+      --bg-card-hover: #252525;
       
-      /* Accent Blue Colors */
-      --accent-blue: #3b82f6;     /* Bright blue primary */
-      --accent-blue-dark: #2563eb; /* Darker blue hover */
-      --accent-glow: rgba(59, 130, 246, 0.3); /* Soft blue glow */
+      /* Green Accent */
+      --accent-green: #00c853;
+      --accent-green-dark: #00a844;
+      --accent-glow: rgba(0, 200, 83, 0.3);
       
       /* Text Colors */
-      --text-main: #1e293b;      /* Dark slate text */
-      --text-muted: #64748b;     /* Grey secondary text */
+      --text-main: #ffffff;
+      --text-muted: #b0b0b0;
       
-      /* Success/Green for Online Badge */
-      --success: #10b981;
+      /* Blue for Profile Info Bottom Area */
+      --blue-info-start: #1e3a8a; /* Dark blue start */
+      --blue-info-end: #172554;   /* Very dark blue end */
       
-      /* Shadows and Borders */
-      --shadow-blue: 0 10px 50px rgba(59, 130, 246, 0.25);
+      /* Success/Shadows */
+      --success: #00c853;
+      --shadow-green: 0 10px 50px rgba(0, 200, 83, 0.25);
+      
       --radius: 20px;
-      
-      /* Indicators */
-      --alert-red: #ff3333;
       --font-heading: 'Inter', sans-serif;
+      --alert-red: #ff3333;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: var(--font-body);
-      background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 50%, #dbeafe 100%);
+      background: linear-gradient(180deg, #050505 0%, #0a0a0a 40%, #0d1117 100%);
       color: var(--text-main);
       min-height: 100vh;
       padding-bottom: 60px;
     }
 
-    /* ===== HERO SECTION ===== */
+    /* ===== HERO SECTION (CENTERED FIX) ===== */
     .hero {
       text-align: center;
       padding: 60px 20px 25px;
@@ -71,7 +71,7 @@
       font-size: 2.8rem;
       font-weight: 800;
       margin-bottom: 25px;
-      background: linear-gradient(135deg, #1e293b 0%, var(--accent-blue) 100%);
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-green) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -85,7 +85,7 @@
     .hero-btn {
       display: inline-block;
       padding: 16px 48px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
       font-weight: 700;
       font-size: 1.05rem;
@@ -101,7 +101,7 @@
     
     .hero-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(59, 130, 246, 0.6);
+      box-shadow: 0 12px 40px rgba(0, 200, 83, 0.6);
     }
 
     /* ===== PROFILES GRID ===== */
@@ -117,7 +117,7 @@
       font-size: 1.8rem;
       font-weight: 700;
       margin: 30px 0 35px;
-      color: #1e293b;
+      color: var(--text-main);
       letter-spacing: -0.5px;
     }
     
@@ -135,15 +135,15 @@
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 200, 83, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
     
     .profile-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.3), transparent 70%);
+      background: radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 70%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
@@ -156,15 +156,15 @@
     
     .profile-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-blue);
-      border-color: var(--accent-blue);
+      box-shadow: var(--shadow-green);
+      border-color: var(--success);
     }
     
     .profile-img-container {
       position: relative;
       z-index: 1;
       overflow: hidden;
-      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      background: linear-gradient(135deg, #1a1a1a, #252525);
     }
     
     .profile-img {
@@ -188,7 +188,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #f0f9ff, #e0f2fe, #f0f9ff);
+      background: linear-gradient(135deg, #1a1a1a, #252525, #1a1a1a);
       background-size: 200% 200%;
       animation: shimmer 1.5s ease-in-out infinite;
     }
@@ -205,7 +205,7 @@
     .online-badge {
       position: absolute;
       top: 12px; right: 12px;
-      background: linear-gradient(135deg, var(--success), #10b981);
+      background: linear-gradient(135deg, var(--success), #00a844);
       color: white;
       font-size: 0.75rem;
       padding: 6px 12px;
@@ -215,7 +215,7 @@
       align-items: center;
       gap: 6px;
       z-index: 2;
-      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 2px 10px rgba(0, 200, 83, 0.4);
     }
     
     .online-badge::before {
@@ -231,36 +231,37 @@
       50% { opacity: 0.4; }
     }
     
+    /* ИЗМЕНЕНИЕ СТИЛЯ ДЛЯ НИЗА КАРТОЧКИ (Синий фон) */
     .profile-info {
       padding: 25px 20px;
       text-align: center;
       position: relative;
       z-index: 1;
-      background: linear-gradient(135deg, #f8fafc, #ffffff);
-      border-top: 1px solid rgba(59, 130, 246, 0.1);
+      background: linear-gradient(135deg, var(--blue-info-start), var(--blue-info-end)); /* Синий градиент */
+      border-top: 1px solid rgba(59, 130, 246, 0.3); /* Тонкая синяя граница сверху */
     }
     
     .profile-name {
       font-family: var(--font-heading);
       font-weight: 700;
       font-size: 1.4rem;
-      color: #1e293b;
+      color: #ffffff;
       margin-bottom: 8px;
       letter-spacing: -0.3px;
     }
     
     .profile-meta {
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.85);
       font-size: 0.95rem;
       margin-bottom: 18px;
       font-weight: 500;
     }
     
-    /* ===== STYLES FOR IOS LINKS (Full Width Blue Button) ===== */
+    /* ===== STYLES FOR IOS LINKS (Full Width Green Button) ===== */
     .ios-tap-link {
       display: block !important;
       padding: 12px 35px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark)) !important;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark)) !important;
       color: white !important;
       font-weight: 700 !important;
       font-size: 0.95rem !important;
@@ -268,7 +269,7 @@
       border-radius: 25px !important;
       cursor: pointer !important;
       text-decoration: none !important;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
       transition: all 0.3s ease !important;
       font-family: var(--font-body) !important;
       letter-spacing: -0.2px !important;
@@ -279,14 +280,14 @@
     
     .ios-tap-link:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5) !important;
+      box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5) !important;
     }
     
-    /* ===== STYLES FOR ANDROID/BROWSER BUTTONS ===== */
+    /* ===== STYLES FOR ANDROID/BROWSER BUTTONS (Same Green Style) ===== */
     .standard-btn {
       display: inline-block;
       padding: 12px 35px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
       font-weight: 700;
       font-size: 0.95rem;
@@ -294,7 +295,7 @@
       border-radius: 25px;
       cursor: pointer;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
       font-family: var(--font-body);
       letter-spacing: -0.2px;
@@ -303,10 +304,10 @@
     
     .standard-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
     }
     
-    /* ===== INSTRUCTION INDICATORS ===== */
+    /* ===== NEW INSTRUCTION STYLES ===== */
     .tap-actions-container {
       display: flex;
       flex-direction: column;
@@ -358,10 +359,10 @@
       display: inline-block;
       padding: 16px 50px;
       background: transparent;
-      color: var(--accent-blue);
+      color: var(--accent-green);
       font-weight: 700;
       font-size: 1.05rem;
-      border: 2px solid var(--accent-blue);
+      border: 2px solid var(--accent-green);
       border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
@@ -371,7 +372,7 @@
     }
     
     .more-btn:hover {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
       transform: translateY(-3px);
       box-shadow: 0 8px 30px var(--accent-glow);
@@ -390,7 +391,7 @@
     /* ===== TESTIMONIALS ===== */
     .testimonials-section {
       padding: 10px 20px 60px;
-      background: linear-gradient(180deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+      background: linear-gradient(180deg, transparent, rgba(0, 200, 83, 0.05), transparent);
     }
     
     .testimonials-grid {
@@ -404,15 +405,15 @@
       background: var(--bg-card);
       border-radius: var(--radius);
       padding: 30px;
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(0, 200, 83, 0.15);
       transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
     
     .testimonial-card:hover {
-      border-color: var(--accent-blue);
+      border-color: var(--success);
       transform: translateY(-5px);
-      box-shadow: var(--shadow-blue);
+      box-shadow: var(--shadow-green);
     }
     
     .testimonial-header {
@@ -428,7 +429,7 @@
       border-radius: 50%;
       object-fit: cover;
       object-position: top;
-      border: 3px solid var(--accent-blue);
+      border: 3px solid var(--success);
       flex-shrink: 0;
       opacity: 0;
       transition: opacity 0.4s ease;
@@ -454,7 +455,7 @@
     }
     
     .stars {
-      color: #fbbf24;
+      color: #ffc107;
       font-size: 1rem;
       letter-spacing: 2px;
       margin-bottom: 15px;
@@ -480,7 +481,7 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(59, 130, 246, 0.95); /* Blue tint overlay */
+      background: rgba(0, 0, 0, 0.95);
       z-index: 1000;
       justify-content: center;
       align-items: center;
@@ -499,14 +500,14 @@
     }
     
     .modal-content {
-      background: linear-gradient(135deg, #ffffff, #f0f9ff);
+      background: linear-gradient(135deg, var(--bg-card), #1a1a1a);
       border-radius: var(--radius);
       padding: 40px 35px;
       max-width: 450px;
       width: 100%;
       text-align: center;
-      border: 2px solid var(--accent-blue);
-      box-shadow: 0 10px 50px rgba(59, 130, 246, 0.5);
+      border: 2px solid var(--success);
+      box-shadow: 0 10px 50px var(--accent-glow);
       animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -521,8 +522,8 @@
       object-fit: cover;
       object-position: top;
       margin: 0 auto 25px;
-      border: 4px solid var(--accent-blue);
-      box-shadow: 0 5px 25px rgba(59, 130, 246, 0.5);
+      border: 4px solid var(--success);
+      box-shadow: 0 5px 25px var(--accent-glow);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
@@ -536,7 +537,7 @@
       font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: 15px;
-      color: #1e293b;
+      color: var(--text-main);
       letter-spacing: -0.5px;
     }
     
@@ -550,7 +551,7 @@
     .modal-btn {
       width: 100%;
       padding: 18px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
       font-weight: 700;
       border: none;
@@ -558,13 +559,13 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 5px 20px var(--accent-glow);
       font-family: var(--font-body);
       letter-spacing: -0.3px;
     }
     
     .modal-btn:hover {
-      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+      box-shadow: 0 8px 30px rgba(0, 200, 83, 0.6);
       transform: translateY(-2px);
     }
 
@@ -575,12 +576,12 @@
       color: var(--text-muted);
       font-size: 0.75rem;
       line-height: 1.6;
-      border-top: 1px solid rgba(59, 130, 246, 0.2);
+      border-top: 1px solid rgba(0, 200, 83, 0.1);
       margin-top: 40px;
     }
     
     footer a {
-      color: var(--accent-blue);
+      color: var(--success);
       text-decoration: none;
       margin: 0 6px;
     }
