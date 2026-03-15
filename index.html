@@ -30,7 +30,7 @@
       --shadow-green: 0 10px 50px rgba(0, 200, 83, 0.25);
       --radius: 20px;
       --font-heading: 'Inter', sans-serif;
-      --alert-red: #ff3333; /* Красный цвет для индикаторов */
+      --alert-red: #ff3333;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,8 +52,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      
-      /* Для выравнивания через flexbox */
       height: auto; 
     }
     
@@ -68,8 +66,6 @@
       background-clip: text;
       letter-spacing: -1px;
       line-height: 1.2;
-      
-      /* Для точного центра текста */
       max-width: 90%; 
       margin-left: auto;
       margin-right: auto;
@@ -249,9 +245,35 @@
       font-weight: 500;
     }
     
-    /* Стили для кнопки-ссылки (только для iOS) */
-    .profile-link {
+    /* ===== STYLES FOR IOS LINKS (Full Width Green Button) ===== */
+    .ios-tap-link {
       display: block !important;
+      padding: 12px 35px;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark)) !important;
+      color: white !important;
+      font-weight: 700 !important;
+      font-size: 0.95rem !important;
+      border: none !important;
+      border-radius: 25px !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+      transition: all 0.3s ease !important;
+      font-family: var(--font-body) !important;
+      letter-spacing: -0.2px !important;
+      text-align: center !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    
+    .ios-tap-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5) !important;
+    }
+    
+    /* ===== STYLES FOR ANDROID/BROWSER BUTTONS (Same Green Style) ===== */
+    .standard-btn {
+      display: inline-block;
       padding: 12px 35px;
       background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: white;
@@ -266,16 +288,14 @@
       font-family: var(--font-body);
       letter-spacing: -0.2px;
       text-align: center;
-      width: 100%;
-      box-sizing: border-box;
     }
     
-    .profile-link:hover {
+    .standard-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
     }
-
-    /* ===== NEW INSTRUCTION STYLES (FIXED LAYOUT) ===== */
+    
+    /* ===== NEW INSTRUCTION STYLES ===== */
     .tap-actions-container {
       display: flex;
       flex-direction: column;
@@ -835,7 +855,6 @@
       // Check if we are in iOS webview (Facebook/Insta)
       const isIOS = window.isIOSAppForLinks();
       
-      // HTML for button instruction (only shown on iOS)
       let actionButtonHtml = '';
       if (isIOS) {
          actionButtonHtml = `
@@ -844,16 +863,15 @@
              <svg class="tap-arrow-svg" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
              
              <!-- Changed from button to anchor tag -->
-             <a href="${finalLink}" class="profile-link" rel="noopener noreferrer">View Profile</a>
+             <a href="${finalLink}" class="ios-tap-link">View Profile</a>
              
              <span class="tap-instruction-text">PRESS AND HOLD FINGER!</span>
            </div>
          `;
       } else {
          // Standard button/link for others (Android/Web)
-         // Используем button для вызова модалки
          actionButtonHtml = `
-           <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+           <button class="standard-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
          `;
       }
 
@@ -873,11 +891,8 @@
       const img = card.querySelector('.profile-img');
       setupImageFadeIn(img);
       
-      // Click handler logic based on platform
       card.addEventListener('click', (e) => {
-        // Если кликнули не на кнопку (например, по фото или тексту имени), то открываем модалку ТОЛЬКО если это НЕ iOS
-        // На iOS клик по картинке вообще ничего не делает, только тап по кнопке работает
-        if (!e.target.closest('.profile-link') && !e.target.closest('.profile-btn')) {
+        if (!e.target.closest('.ios-tap-link') && !e.target.closest('.standard-btn')) {
           openModal(`${profile.name}, ${profile.age}`, `images/${profile.img}`);
         }
       });
@@ -924,7 +939,6 @@
       const finalLink = AFFILIATE_LINK.replace('{click_id}', clickId);
       const cleanLink = finalLink.trim();
       
-      // Add Hero Instructions ONLY if iOS
       const needsIndicator = window.isIOSAppForLinks();
       if(needsIndicator) {
          
@@ -937,11 +951,8 @@
          topTextLabel.style.textAlign = "center";
          topTextLabel.style.width = "100%"; 
 
-         // Insert Top Arrow BEFORE button
          mainHeroSection.insertBefore(document.createRange().createContextualFragment(topArrowIcon), mainCta);
-         // Insert Top Text AFTER button
          mainHeroSection.insertBefore(topTextLabel, mainCta.nextSibling);
-         // Update Top Link
          mainCta.href = cleanLink;
       }
 
@@ -955,19 +966,14 @@
          bottomTextLabel.style.textAlign = "center";
          bottomTextLabel.style.width = "100%"; 
 
-         // Insert Bottom Arrow BEFORE button
          moreProfilesWrapper.insertBefore(document.createRange().createContextualFragment(bottomArrowIcon), moreProfilesBtn);
-         // Insert Bottom Text AFTER button
          moreProfilesWrapper.insertBefore(bottomTextLabel, moreProfilesBtn.nextSibling);
-         // Update Bottom Link
          moreProfilesBtn.href = cleanLink;
       } else {
-          // Ensure both links work for non-iOS too (standard behavior)
           mainCta.href = cleanLink;
           moreProfilesBtn.href = cleanLink;
       }
 
-      // Modal Click Handler works for everyone (Android/Web)
       modalContinue.onclick = () => {
         trackClick('modal_continue');
         window.location.href = cleanLink;
