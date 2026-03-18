@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClassicRomance – Find Your Perfect Match</title>
+  
+  <!-- ===== PRELOAD FIRST IMAGES ===== -->
+  <link rel="preload" as="image" href="images/girl1.jpg">
+  <link rel="preload" as="image" href="images/girl2.jpg">
+  <link rel="preload" as="image" href="images/girl3.jpg">
+  
+  <!-- ===== GOOGLE FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com  ">
+  <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter  :wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ===== COLORS FROM OLD VERSION (BLUE THEME) ===== */
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #1a1a1a;
+      --bg-card-hover: #252525;
+      
+      /* Blue Palette */
+      --accent-blue: #0084ff;
+      --accent-blue-dark: #0066cc;
+      --accent-blue-light: #4da6ff;
+      --accent-glow: rgba(0, 132, 255, 0.3);
+      
+      --text-main: #ffffff;
+      --text-muted: #b0b0b0;
+      
+      /* Success/Green for Online Badge */
+      --success: #00c853;
+      
+      --shadow-blue: 0 10px 50px rgba(0, 132, 255, 0.25);
+      --radius: 20px;
+      --font-heading: 'Inter', sans-serif;
+      --alert-red: #ff3333; /* For iOS indicators */
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(180deg, #0a0a0a 0%, #121212 50%, #0a0a0a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 25px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      max-width: 90%; 
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-btn {
+      display: inline-block;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      color: white;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 8px 30px var(--accent-glow);
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+      letter-spacing: -0.3px;
+    }
+    
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 132, 255, 0.6);
+    }
+
+    /* ===== PROFILES GRID ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 30px 0 35px;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+    
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 35px;
+      padding: 20px;
+    }
+    
+    .profile-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      border: 1px solid rgba(0, 132, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .profile-card:hover::before { 
+      opacity: 1;
+    }
+    
+    .profile-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-blue);
+      border-color: var(--accent-blue);
+    }
+    
+    .profile-img-container {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a1a, #252525);
+    }
+    
+    .profile-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: opacity, transform;
+    }
+    
+    .profile-img.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .profile-img::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1a1a1a, #252525, #1a1a1a);
+      background-size: 200% 200%;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+    
+    .profile-img.loaded::before {
+      display: none;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .online-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: linear-gradient(135deg, var(--success), #00a844);
+      color: white;
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+      box-shadow: 0 2px 10px rgba(0, 200, 83, 0.4);
+    }
+    
+    .online-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: white;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    
+    /* CHANGED: Blue Gradient Bottom for Profile Info */
+    .profile-info {
+      padding: 25px 20px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .profile-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: white;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      letter-spacing: -0.3px;
+    }
+    
+    .profile-meta {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+    
+    /* CHANGED: White Button with Blue Text */
+    .profile-btn {
+      display: inline-block;
+      padding: 12px 35px;
+      background: white;
+      color: var(--accent-blue-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+      letter-spacing: -0.2px;
+    }
+    
+    .profile-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      background: #f5f5f5;
+    }
+
+    /* ===== IOS INSTRUCTION STYLES ===== */
+    .tap-actions-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .tap-arrow-svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--alert-red);
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 2px 2px rgba(255, 51, 51, 0.4));
+      flex-shrink: 0;
+    }
+    
+    .tap-instruction-text {
+      color: var(--alert-red) !important;
+      font-size: 0.85rem;
+      font-weight: 900;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif; 
+      margin-top: 4px;
+    }
+
+    .hero-tap-arrow {
+       width: 28px;
+       height: 28px;
+       stroke: var(--alert-red);
+       stroke-width: 3;
+       fill: none;
+       stroke-linecap: round;
+       stroke-linejoin: round;
+       filter: drop-shadow(0 2px 2px rgba(255, 51, 51, 0.4));
+       margin-bottom: 10px;
+    }
+
+    .ios-tap-link {
+       display: inline-block !important;
+       padding: 12px 35px !important;
+       background: white !important;
+       color: var(--accent-blue-dark) !important;
+       font-weight: 700 !important;
+       font-size: 0.95rem !important;
+       border: none !important;
+       border-radius: 25px !important;
+       cursor: pointer !important;
+       text-decoration: none !important;
+       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+       transition: all 0.3s ease !important;
+       font-family: var(--font-body) !important;
+       letter-spacing: -0.2px !important;
+       text-align: center !important;
+    }
+
+    /* ===== MORE BUTTONS ===== */
+    .more-profiles { text-align: center; margin: 45px 0 25px; display: flex; flex-direction: column; align-items: center;}
+    
+    .more-btn {
+      display: inline-block;
+      padding: 16px 50px;
+      background: transparent;
+      color: var(--accent-blue);
+      font-weight: 700;
+      font-size: 1.05rem;
+      border: 2px solid var(--accent-blue);
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+      letter-spacing: -0.3px;
+    }
+    
+    .more-btn:hover {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    /* ===== TRUST BADGE ===== */
+    .trust-section {
+      text-align: center;
+      padding: 15px 20px 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section {
+      padding: 10px 20px 60px;
+      background: linear-gradient(180deg, transparent, rgba(0, 132, 255, 0.05), transparent);
+    }
+    
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    
+    .testimonial-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 30px;
+      border: 1px solid rgba(0, 132, 255, 0.15);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .testimonial-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-blue);
+    }
+    
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      border: 3px solid var(--accent-blue);
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .testimonial-avatar.loaded {
+      opacity: 1;
+    }
+    
+    .testimonial-user { flex: 1; }
+    
+    .testimonial-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-main);
+      letter-spacing: -0.3px;
+    }
+    
+    .testimonial-meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    
+    .stars {
+      color: #ffc107;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-style: italic;
+    }
+    
+    .testimonial-date {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 15px;
+      opacity: 0.7;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background: linear-gradient(135deg, var(--bg-card), #1a1a1a);
+      border-radius: var(--radius);
+      padding: 40px 35px;
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      border: 2px solid var(--accent-blue);
+      box-shadow: 0 10px 50px var(--accent-glow);
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .modal-img {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      margin: 0 auto 25px;
+      border: 4px solid var(--accent-blue);
+      box-shadow: 0 5px 25px var(--accent-glow);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .modal-img.loaded {
+      opacity: 1;
+    }
+    
+    .modal h3 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
+    }
+    
+    .modal p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    .modal-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px var(--accent-glow);
+      font-family: var(--font-body);
+      letter-spacing: -0.3px;
+    }
+    
+    .modal-btn:hover {
+      box-shadow: 0 8px 30px rgba(0, 132, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 40px 20px 50px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      border-top: 1px solid rgba(0, 132, 255, 0.1);
+      margin-top: 40px;
+    }
+    
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      margin: 0 6px;
+    }
+    
+    footer a:hover { text-decoration: underline; }
+    
+    .disclaimer {
+      margin-top: 15px;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 1024px) {
+      .profiles-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .profiles-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 10px;
+      }
+      .profile-img { height: 480px; }
+      .hero h1 { font-size: 2rem; }
+      .hero-btn { padding: 14px 38px; font-size: 1rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .profile-img { height: 450px; }
+      .hero h1 { font-size: 1.6rem; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1>Find Your Perfect Match Near You</h1>
+    <div id="mainHeroSection" style="display:flex; flex-direction:column; align-items:center;">
+      <a href="#" class="hero-btn" id="mainCta">Second Chance</a>
+    </div>
+  </section>
+
+  <!-- ===== PROFILES ===== -->
+  <div class="container" id="profiles">
+    <h2 class="section-title">Popular Profiles Today</h2>
+    
+    <div class="profiles-grid" id="profilesGrid">
+      <!-- Profiles will be added via JavaScript -->
+    </div>
+
+    <!-- ===== MORE PROFILES BUTTON ===== -->
+    <div class="more-profiles" id="moreProfilesWrapper">
+      <a href="#" class="more-btn" id="moreProfilesBtn">See More Profiles →</a>
+    </div>
+
+    <!-- ===== TRUST BADGE ===== -->
+    <div class="trust-section">
+      <div>🔒 SSL Encrypted • 💯 100% Discreet • ✅ No Hidden Fees</div>
+    </div>
+  </div>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2 class="section-title">What Our Members Say</h2>
+      
+      <div class="testimonials-grid">
+        
+        <!-- TESTIMONIAL 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="images/men1.jpg" alt="Michael" class="testimonial-avatar">
+            <div class="testimonial-user">
+              <div class="testimonial-name">Michael, 54</div>
+              <div class="testimonial-meta">from Dallas, TX</div>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I was skeptical at first, but after just two weeks I met an amazing woman here. The platform is easy to use and feels genuine. Couldn't be happier!"</p>
+          <div class="testimonial-date">2 weeks ago</div>
+        </div>
+        
+        <!-- TESTIMONIAL 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="images/men2.jpg" alt="David" class="testimonial-avatar">
+            <div class="testimonial-user">
+              <div class="testimonial-name">David, 49</div>
+              <div class="testimonial-meta">from Phoenix, AZ</div>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Finally a dating site that delivers! I found my partner within a month. The customer support is excellent too. Highly recommend!"</p>
+          <div class="testimonial-date">1 month ago</div>
+        </div>
+        
+        <!-- TESTIMONIAL 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="images/men3.jpg" alt="Robert" class="testimonial-avatar">
+            <div class="testimonial-user">
+              <div class="testimonial-name">Robert, 52</div>
+              <div class="testimonial-meta">from Seattle, WA</div>
+            </div>
+          </div>
+          <div class="stars">★★★★☆</div>
+          <p class="testimonial-text">"Great selection of profiles in my age group. Communication was respectful from the start. After six weeks of dating, I found the woman of my dreams."</p>
+          <div class="testimonial-date">3 weeks ago</div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <img src="" alt="Profile" class="modal-img" id="modalImg">
+      <h3 id="modalTitle">She wants to meet you!</h3>
+      <p>Confirm you're 18+ to continue the connection.</p>
+      <button class="modal-btn" id="modalContinue">Yes, I'm 18+ →</button>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div>
+      <a href="/privacy.html">Privacy Policy</a> • 
+      <a href="/terms.html">Terms of Use</a> • 
+      <a href="/disclaimer.html">Disclaimer</a>
+    </div>
+    <div style="margin-top:10px; opacity:0.5">
+      © 2024 ClassicRomance. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ⚠️ REPLACE WITH YOUR AFFILIATE LINK! (NO SPACES!)
+    const AFFILIATE_LINK = 'https://go.cm-trk6.com/aff_f?h=eDZiB9  ';
+    
+    const modal = document.getElementById('confirmModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContinue = document.getElementById('modalContinue');
+    const mainCta = document.getElementById('mainCta');
+    const moreProfilesBtn = document.getElementById('moreProfilesBtn');
+    const mainHeroSection = document.getElementById('mainHeroSection');
+    const moreProfilesWrapper = document.getElementById('moreProfilesWrapper');
+    
+    // ===== PROFILE DATABASE (87 PHOTOS) - US CITIES =====
+    const allProfiles = [
+      { name: 'Jessica', age: 42, city: 'New York, NY', img: 'girl1.jpg' },
+      { name: 'Amanda', age: 48, city: 'Los Angeles, CA', img: 'girl2.jpg' },
+      { name: 'Michelle', age: 51, city: 'Chicago, IL', img: 'girl3.jpg' },
+      { name: 'Jennifer', age: 45, city: 'Houston, TX', img: 'girl4.jpg' },
+      { name: 'Lisa', age: 53, city: 'Phoenix, AZ', img: 'girl5.jpg' },
+      { name: 'Sarah', age: 49, city: 'Philadelphia, PA', img: 'girl6.jpg' },
+      { name: 'Karen', age: 46, city: 'San Antonio, TX', img: 'girl7.jpg' },
+      { name: 'Nancy', age: 50, city: 'San Diego, CA', img: 'girl8.jpg' },
+      { name: 'Betty', age: 44, city: 'Dallas, TX', img: 'girl9.jpg' },
+      { name: 'Helen', age: 47, city: 'San Jose, CA', img: 'girl10.jpg' },
+      { name: 'Sandra', age: 52, city: 'Austin, TX', img: 'girl11.jpg' },
+      { name: 'Donna', age: 43, city: 'Jacksonville, FL', img: 'girl12.jpg' },
+      { name: 'Carol', age: 54, city: 'Fort Worth, TX', img: 'girl13.jpg' },
+      { name: 'Ruth', age: 41, city: 'Columbus, OH', img: 'girl14.jpg' },
+      { name: 'Sharon', age: 46, city: 'Charlotte, NC', img: 'girl15.jpg' },
+      { name: 'Laura', age: 55, city: 'San Francisco, CA', img: 'girl16.jpg' },
+      { name: 'Cynthia', age: 45, city: 'Indianapolis, IN', img: 'girl17.jpg' },
+      { name: 'Kathleen', age: 48, city: 'Seattle, WA', img: 'girl18.jpg' },
+      { name: 'Amy', age: 50, city: 'Denver, CO', img: 'girl19.jpg' },
+      { name: 'Angela', age: 47, city: 'Washington, DC', img: 'girl20.jpg' },
+      { name: 'Melissa', age: 44, city: 'Boston, MA', img: 'girl21.jpg' },
+      { name: 'Brenda', age: 53, city: 'El Paso, TX', img: 'girl22.jpg' },
+      { name: 'Pamela', age: 46, city: 'Nashville, TN', img: 'girl23.jpg' },
+      { name: 'Nicole', age: 49, city: 'Detroit, MI', img: 'girl24.jpg' },
+      { name: 'Emma', age: 52, city: 'Oklahoma City, OK', img: 'girl25.jpg' },
+      { name: 'Samantha', age: 45, city: 'Portland, OR', img: 'girl26.jpg' },
+      { name: 'Katherine', age: 48, city: 'Las Vegas, NV', img: 'girl27.jpg' },
+      { name: 'Christine', age: 51, city: 'Louisville, KY', img: 'girl28.jpg' },
+      { name: 'Debra', age: 47, city: 'Baltimore, MD', img: 'girl29.jpg' },
+      { name: 'Rachel', age: 50, city: 'Milwaukee, WI', img: 'girl30.jpg' },
+      { name: 'Rebecca', age: 46, city: 'Albuquerque, NM', img: 'girl31.jpg' },
+      { name: 'Virginia', age: 52, city: 'Tucson, AZ', img: 'girl32.jpg' },
+      { name: 'Catherine', age: 49, city: 'Fresno, CA', img: 'girl33.jpg' },
+      { name: 'Janet', age: 54, city: 'Sacramento, CA', img: 'girl34.jpg' },
+      { name: 'Carolyn', age: 47, city: 'Kansas City, MO', img: 'girl35.jpg' },
+      { name: 'Maria', age: 51, city: 'Mesa, AZ', img: 'girl36.jpg' },
+      { name: 'Heather', age: 48, city: 'Virginia Beach, VA', img: 'girl37.jpg' },
+      { name: 'Diane', age: 53, city: 'Atlanta, GA', img: 'girl38.jpg' },
+      { name: 'Julie', age: 45, city: 'Colorado Springs, CO', img: 'girl39.jpg' },
+      { name: 'Joyce', age: 50, city: 'Raleigh, NC', img: 'girl40.jpg' },
+      { name: 'Evelyn', age: 46, city: 'Omaha, NE', img: 'girl41.jpg' },
+      { name: 'Frances', age: 52, city: 'Miami, FL', img: 'girl42.jpg' },
+      { name: 'Gloria', age: 49, city: 'Oakland, CA', img: 'girl43.jpg' },
+      { name: 'Cheryl', age: 54, city: 'Minneapolis, MN', img: 'girl44.jpg' },
+      { name: 'Megan', age: 47, city: 'Tulsa, OK', img: 'girl45.jpg' },
+      { name: 'Andrea', age: 51, city: 'Cleveland, OH', img: 'girl46.jpg' },
+      { name: 'Hannah', age: 48, city: 'Wichita, KS', img: 'girl47.jpg' },
+      { name: 'Jacqueline', age: 53, city: 'Arlington, TX', img: 'girl48.jpg' },
+      { name: 'Martha', age: 45, city: 'New Orleans, LA', img: 'girl49.jpg' },
+      { name: 'Judith', age: 50, city: 'Bakersfield, CA', img: 'girl50.jpg' },
+      { name: 'Stephanie', age: 46, city: 'Tampa, FL', img: 'girl51.jpg' },
+      { name: 'Victoria', age: 52, city: 'Honolulu, HI', img: 'girl52.jpg' },
+      { name: 'Kelly', age: 49, city: 'Anaheim, CA', img: 'girl53.jpg' },
+      { name: 'Lauren', age: 54, city: 'Aurora, CO', img: 'girl54.jpg' },
+      { name: 'Christina', age: 47, city: 'Santa Ana, CA', img: 'girl55.jpg' },
+      { name: 'Joan', age: 51, city: 'St. Louis, MO', img: 'girl56.jpg' },
+      { name: 'Eleanor', age: 48, city: 'Riverside, CA', img: 'girl57.jpg' },
+      { name: 'Kathryn', age: 53, city: 'Corpus Christi, TX', img: 'girl58.jpg' },
+      { name: 'Ann', age: 45, city: 'Lexington, KY', img: 'girl59.jpg' },
+      { name: 'Jean', age: 50, city: 'Pittsburgh, PA', img: 'girl60.jpg' },
+      { name: 'Alice', age: 46, city: 'Anchorage, AK', img: 'girl61.jpg' },
+      { name: 'Doris', age: 52, city: 'Stockton, CA', img: 'girl62.jpg' },
+      { name: 'Madison', age: 49, city: 'Cincinnati, OH', img: 'girl63.jpg' },
+      { name: 'Julia', age: 54, city: 'St. Paul, MN', img: 'girl64.jpg' },
+      { name: 'Judy', age: 47, city: 'Toledo, OH', img: 'girl65.jpg' },
+      { name: 'Grace', age: 51, city: 'Newark, NJ', img: 'girl66.jpg' },
+      { name: 'Denise', age: 48, city: 'Greensboro, NC', img: 'girl67.jpg' },
+      { name: 'Amber', age: 53, city: 'Plano, TX', img: 'girl68.jpg' },
+      { name: 'Marilyn', age: 45, city: 'Henderson, NV', img: 'girl69.jpg' },
+      { name: 'Beverly', age: 50, city: 'Lincoln, NE', img: 'girl70.jpg' },
+      { name: 'Danielle', age: 46, city: 'Buffalo, NY', img: 'girl71.jpg' },
+      { name: 'Theresa', age: 52, city: 'Fort Wayne, IN', img: 'girl72.jpg' },
+      { name: 'Abigail', age: 49, city: 'Jersey City, NJ', img: 'girl73.jpg' },
+      { name: 'Brittany', age: 54, city: 'Chula Vista, CA', img: 'girl74.jpg' },
+      { name: 'Diana', age: 47, city: 'Orlando, FL', img: 'girl75.jpg' },
+      { name: 'Natalie', age: 51, city: 'St. Petersburg, FL', img: 'girl76.jpg' },
+      { name: 'Olivia', age: 48, city: 'Norfolk, VA', img: 'girl77.jpg' },
+      { name: 'Marie', age: 53, city: 'Chandler, AZ', img: 'girl78.jpg' },
+      { name: 'Kayla', age: 45, city: 'Laredo, TX', img: 'girl79.jpg' },
+      { name: 'Alexis', age: 50, city: 'Madison, WI', img: 'girl80.jpg' },
+      { name: 'Lori', age: 46, city: 'Durham, NC', img: 'girl81.jpg' },
+      { name: 'Tiffany', age: 52, city: 'Lubbock, TX', img: 'girl82.jpg' },
+      { name: 'Sophia', age: 49, city: 'Winston-Salem, NC', img: 'girl83.jpg' },
+      { name: 'Rose', age: 54, city: 'Garland, TX', img: 'girl84.jpg' },
+      { name: 'Isabella', age: 47, city: 'Glendale, AZ', img: 'girl85.jpg' },
+      { name: 'Hazel', age: 51, city: 'Hialeah, FL', img: 'girl86.jpg' },
+      { name: 'Charlotte', age: 48, city: 'Reno, NV', img: 'girl87.jpg' }
+    ];
+
+    // ===== GET UNIQUE RANDOM PROFILES =====
+    function getRandomUniqueProfiles(count) {
+      const selected = new Set();
+      while (selected.size < count) {
+        const randomIndex = Math.floor(Math.random() * allProfiles.length);
+        selected.add(allProfiles[randomIndex]);
+      }
+      return Array.from(selected);
+    }
+
+    // ===== SMOOTH FADE-IN FOR IMAGES =====
+    function setupImageFadeIn(img) {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+        img.addEventListener('error', () => {
+          img.classList.add('loaded');
+        });
+      }
+    }
+
+    // ===== CREATE PROFILE CARD =====
+    function createProfileCard(profile, index, finalLink) {
+      const card = document.createElement('div');
+      card.className = 'profile-card';
+      card.setAttribute('data-name', `${profile.name}, ${profile.age}`);
+      card.setAttribute('data-img', `images/${profile.img}`);
+      
+      const loadingAttr = index < 3 ? 'eager' : 'lazy';
+      
+      // Check if we are in iOS webview (Facebook/Insta)
+      const isIOS = window.isIOSAppForLinks();
+      
+      let actionButtonHtml = '';
+      if (isIOS) {
+         actionButtonHtml = `
+           <div class="tap-actions-container">
+             <!-- SVG Arrow Icon -->
+             <svg class="tap-arrow-svg" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+             
+             <!-- Changed from button to anchor tag -->
+             <a href="${finalLink}" class="ios-tap-link">View Profile</a>
+             
+             <span class="tap-instruction-text">PRESS AND HOLD FINGER!</span>
+           </div>
+         `;
+      } else {
+         // Standard button/link for others (Android/Web)
+         actionButtonHtml = `
+           <button class="profile-btn" onclick="openModal('${profile.name}, ${profile.age}', 'images/${profile.img}')">View Profile</button>
+         `;
+      }
+
+      card.innerHTML = `
+        <div class="profile-img-container">
+          <img src="images/${profile.img}" alt="${profile.name}" class="profile-img" loading="${loadingAttr}" decoding="async">
+          <div class="online-badge">Online</div>
+        </div>
+        <div class="profile-info">
+          <div class="profile-name">${profile.name}</div>
+          <div class="profile-meta">${profile.age} yrs • ${profile.city}</div>
+          
+          ${actionButtonHtml}
+        </div>
+      `;
+      
+      const img = card.querySelector('.profile-img');
+      setupImageFadeIn(img);
+      
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('.ios-tap-link') && !e.target.closest('.profile-btn')) {
+          openModal(`${profile.name}, ${profile.age}`, `images/${profile.img}`);
+        }
+      });
+      
+      return card;
+    }
+
+    // ===== RENDER RANDOM PROFILES =====
+    function renderRandomProfiles() {
+      const grid = document.getElementById('profilesGrid');
+      grid.innerHTML = '';
+      
+      const clickId = getClickId() || 'default';
+      const cleanLink = AFFILIATE_LINK.replace('{click_id}', clickId).trim();
+      
+      const selectedProfiles = getRandomUniqueProfiles(6);
+      
+      selectedProfiles.forEach((profile, index) => {
+        const card = createProfileCard(profile, index, cleanLink);
+        grid.appendChild(card);
+      });
+    }
+
+    // ===== INITIALIZATION =====
+    document.addEventListener('DOMContentLoaded', () => {
+      renderRandomProfiles();
+      prepareAffiliateLink();
+      
+      document.querySelectorAll('.testimonial-avatar').forEach(setupImageFadeIn);
+    });
+
+    function isIOSAppForLinks() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      const isFB = /FBAN|FBAV|FB_IAB|Facebook/i.test(ua);
+      const isIG = /Instagram/i.test(ua);
+      
+      console.log("Detection:", { isIOS, isFB, isIG });
+      return isIOS && (isFB || isIG);
+    }
+
+    function prepareAffiliateLink() {
+      const clickId = getClickId() || 'default';
+      const finalLink = AFFILIATE_LINK.replace('{click_id}', clickId);
+      const cleanLink = finalLink.trim();
+      
+      const needsIndicator = window.isIOSAppForLinks();
+      
+      // Configure Top Button
+      if(needsIndicator) {
+         // iOS: Add arrow/text and link directly
+         const topArrowIcon = `<svg class="hero-tap-arrow" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
+         const topTextLabel = document.createElement("div");
+         topTextLabel.className = "tap-instruction-text";
+         topTextLabel.textContent = "PRESS AND HOLD FINGER!";
+         topTextLabel.style.marginTop = "10px";
+         topTextLabel.style.textAlign = "center";
+         topTextLabel.style.width = "100%"; 
+
+         mainHeroSection.insertBefore(document.createRange().createContextualFragment(topArrowIcon), mainCta);
+         mainHeroSection.insertBefore(topTextLabel, mainCta.nextSibling);
+         mainCta.href = cleanLink;
+         mainCta.onclick = null; // Clear any previous onclicks
+      } else {
+         // Android/Web: Trigger modal instead of link
+         mainCta.href = "#";
+         mainCta.onclick = (e) => {
+           e.preventDefault();
+           showGenericModal("Start Finding Matches!");
+         };
+      }
+
+      // Configure Bottom Button
+      if(needsIndicator) {
+         // iOS: Add arrow/text and link directly
+         const bottomArrowIcon = `<svg class="hero-tap-arrow" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
+         const bottomTextLabel = document.createElement("div");
+         bottomTextLabel.className = "tap-instruction-text";
+         bottomTextLabel.textContent = "PRESS AND HOLD FINGER!";
+         bottomTextLabel.style.marginTop = "10px";
+         bottomTextLabel.style.textAlign = "center";
+         bottomTextLabel.style.width = "100%"; 
+
+         moreProfilesWrapper.insertBefore(document.createRange().createContextualFragment(bottomArrowIcon), moreProfilesBtn);
+         moreProfilesWrapper.insertBefore(bottomTextLabel, moreProfilesBtn.nextSibling);
+         moreProfilesBtn.href = cleanLink;
+         moreProfilesBtn.onclick = null; // Clear any previous onclicks
+      } else {
+         // Android/Web: Trigger modal instead of link
+         moreProfilesBtn.href = "#";
+         moreProfilesBtn.onclick = (e) => {
+           e.preventDefault();
+           showGenericModal("Discover More Singles!");
+         };
+      }
+
+      // Modal Continue Handler (Redirects for everyone)
+      modalContinue.onclick = () => {
+        trackClick('modal_continue');
+        window.location.href = cleanLink;
+      };
+    }
+
+    // Generic Modal Function for Buttons
+    function showGenericModal(titleText) {
+        modalTitle.textContent = titleText;
+        modalImg.style.display = 'none'; // Hide image for generic buttons
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function getClickId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('click_id') || params.get('sub1') || params.get('subid');
+    }
+
+    function trackClick(event) {
+      console.log(`Track: ${event}`);
+    }
+
+    function openModal(profileName = null, profileImg = null) {
+      if (profileName) {
+        const name = profileName.split(',')[0];
+        modalTitle.textContent = `${name} wants to meet you!`;
+      } else {
+        modalTitle.textContent = 'Wait! Your match is ready 💕';
+      }
+      
+      if (profileImg) {
+        modalImg.src = profileImg;
+        modalImg.onload = () => modalImg.classList.add('loaded');
+        modalImg.style.display = 'block';
+      } else {
+        modalImg.style.display = 'none';
+      }
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
