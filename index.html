@@ -37,7 +37,7 @@
       --shadow-blue: 0 10px 50px rgba(0, 132, 255, 0.25);
       --radius: 20px;
       --font-heading: 'Inter', sans-serif;
-      --alert-red: #ff3333; /* For iOS indicators */
+      --alert-red: #ff3333;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -225,7 +225,6 @@
       50% { opacity: 0.4; }
     }
     
-    /* CHANGED: Blue Gradient Bottom for Profile Info */
     .profile-info {
       padding: 25px 20px;
       text-align: center;
@@ -252,7 +251,6 @@
       font-weight: 500;
     }
     
-    /* CHANGED: White Button with Blue Text */
     .profile-btn {
       display: inline-block;
       padding: 12px 35px;
@@ -727,7 +725,7 @@
     const mainHeroSection = document.getElementById('mainHeroSection');
     const moreProfilesWrapper = document.getElementById('moreProfilesWrapper');
     
-    // ===== PROFILE DATABASE (87 PHOTOS) - US CITIES =====
+    // ===== PROFILE DATABASE (222 PHOTOS) - US CITIES =====
     const allProfiles = [
       { name: 'Jessica', age: 42, city: 'New York, NY', img: 'girl1.jpg' },
       { name: 'Amanda', age: 48, city: 'Los Angeles, CA', img: 'girl2.jpg' },
@@ -815,7 +813,142 @@
       { name: 'Rose', age: 54, city: 'Garland, TX', img: 'girl84.jpg' },
       { name: 'Isabella', age: 47, city: 'Glendale, AZ', img: 'girl85.jpg' },
       { name: 'Hazel', age: 51, city: 'Hialeah, FL', img: 'girl86.jpg' },
-      { name: 'Charlotte', age: 48, city: 'Reno, NV', img: 'girl87.jpg' }
+      { name: 'Charlotte', age: 48, city: 'Reno, NV', img: 'girl87.jpg' },
+      { name: 'Emily', age: 45, city: 'Boise, ID', img: 'girl88.jpg' },
+      { name: 'Jennifer', age: 50, city: 'Des Moines, IA', img: 'girl89.jpg' },
+      { name: 'Sarah', age: 43, city: 'Little Rock, AR', img: 'girl90.jpg' },
+      { name: 'Ashley', age: 47, city: 'Mobile, AL', img: 'girl91.jpg' },
+      { name: 'Elizabeth', age: 52, city: 'Providence, RI', img: 'girl92.jpg' },
+      { name: 'Megan', age: 44, city: 'Charleston, WV', img: 'girl93.jpg' },
+      { name: 'Jessica', age: 49, city: 'Tallahassee, FL', img: 'girl94.jpg' },
+      { name: 'Amanda', age: 55, city: 'Columbia, SC', img: 'girl95.jpg' },
+      { name: 'Michelle', age: 46, city: 'Montgomery, AL', img: 'girl96.jpg' },
+      { name: 'Jennifer', age: 48, city: 'Salt Lake City, UT', img: 'girl97.jpg' },
+      { name: 'Lisa', age: 51, city: 'Raleigh, NC', img: 'girl98.jpg' },
+      { name: 'Amanda', age: 44, city: 'Augusta, GA', img: 'girl99.jpg' },
+      { name: 'Michelle', age: 53, city: 'Cheyenne, WY', img: 'girl100.jpg' },
+      { name: 'Jennifer', age: 42, city: 'Pierre, SD', img: 'girl101.jpg' },
+      { name: 'Lisa', age: 45, city: 'Baton Rouge, LA', img: 'girl102.jpg' },
+      { name: 'Jessica', age: 50, city: 'Hartford, CT', img: 'girl103.jpg' },
+      { name: 'Amanda', age: 47, city: 'Springfield, IL', img: 'girl104.jpg' },
+      { name: 'Michelle', age: 54, city: 'Annapolis, MD', img: 'girl105.jpg' },
+      { name: 'Jennifer', age: 43, city: 'Concord, NH', img: 'girl106.jpg' },
+      { name: 'Lisa', age: 49, city: 'Carson City, NV', img: 'girl107.jpg' },
+      { name: 'Jessica', age: 46, city: 'Helena, MT', img: 'girl108.jpg' },
+      { name: 'Amanda', age: 52, city: 'Olympia, WA', img: 'girl109.jpg' },
+      { name: 'Michelle', age: 44, city: 'Jefferson City, MO', img: 'girl110.jpg' },
+      { name: 'Jennifer', age: 48, city: 'Frankfort, KY', img: 'girl111.jpg' },
+      { name: 'Lisa', age: 50, city: 'Richmond, VA', img: 'girl112.jpg' },
+      { name: 'Jessica', age: 45, city: 'Topeka, KS', img: 'girl113.jpg' },
+      { name: 'Amanda', age: 53, city: 'Dover, DE', img: 'girl114.jpg' },
+      { name: 'Michelle', age: 47, city: 'Montpelier, VT', img: 'girl115.jpg' },
+      { name: 'Jennifer', age: 42, city: 'Columbia, SC', img: 'girl116.jpg' },
+      { name: 'Lisa', age: 49, city: 'Juneau, AK', img: 'girl117.jpg' },
+      { name: 'Jessica', age: 44, city: 'Bismarck, ND', img: 'girl118.jpg' },
+      { name: 'Amanda', age: 55, city: 'Oklahoma City, OK', img: 'girl119.jpg' },
+      { name: 'Michelle', age: 46, city: 'Lincoln, NE', img: 'girl120.jpg' },
+      { name: 'Jennifer', age: 51, city: 'Cheyenne, WY', img: 'girl121.jpg' },
+      { name: 'Lisa', age: 48, city: 'Pierre, SD', img: 'girl122.jpg' },
+      { name: 'Jessica', age: 43, city: 'Carson City, NV', img: 'girl123.jpg' },
+      { name: 'Amanda', age: 50, city: 'Baton Rouge, LA', img: 'girl124.jpg' },
+      { name: 'Michelle', age: 47, city: 'Annapolis, MD', img: 'girl125.jpg' },
+      { name: 'Jennifer', age: 52, city: 'Springfield, IL', img: 'girl126.jpg' },
+      { name: 'Lisa', age: 45, city: 'Hartford, CT', img: 'girl127.jpg' },
+      { name: 'Jessica', age: 49, city: 'Pierre, SD', img: 'girl128.jpg' },
+      { name: 'Amanda', age: 54, city: 'Bismarck, ND', img: 'girl129.jpg' },
+      { name: 'Michelle', age: 42, city: 'Jefferson City, MO', img: 'girl130.jpg' },
+      { name: 'Jennifer', age: 46, city: 'Montpelier, VT', img: 'girl131.jpg' },
+      { name: 'Lisa', age: 53, city: 'Carson City, NV', img: 'girl132.jpg' },
+      { name: 'Jessica', age: 48, city: 'Juneau, AK', img: 'girl133.jpg' },
+      { name: 'Amanda', age: 44, city: 'Oklahoma City, OK', img: 'girl134.jpg' },
+      { name: 'Michelle', age: 55, city: 'Lincoln, NE', img: 'girl135.jpg' },
+      { name: 'Jennifer', age: 47, city: 'Cheyenne, WY', img: 'girl136.jpg' },
+      { name: 'Lisa', age: 50, city: 'Pierre, SD', img: 'girl137.jpg' },
+      { name: 'Jessica', age: 43, city: 'Baton Rouge, LA', img: 'girl138.jpg' },
+      { name: 'Amanda', age: 51, city: 'Annapolis, MD', img: 'girl139.jpg' },
+      { name: 'Michelle', age: 46, city: 'Springfield, IL', img: 'girl140.jpg' },
+      { name: 'Jennifer', age: 49, city: 'Hartford, CT', img: 'girl141.jpg' },
+      { name: 'Lisa', age: 54, city: 'Carson City, NV', img: 'girl142.jpg' },
+      { name: 'Jessica', age: 42, city: 'Jefferson City, MO', img: 'girl143.jpg' },
+      { name: 'Amanda', age: 45, city: 'Montpelier, VT', img: 'girl144.jpg' },
+      { name: 'Michelle', age: 52, city: 'Juneau, AK', img: 'girl145.jpg' },
+      { name: 'Jennifer', age: 47, city: 'Oklahoma City, OK', img: 'girl146.jpg' },
+      { name: 'Lisa', age: 48, city: 'Lincoln, NE', img: 'girl147.jpg' },
+      { name: 'Jessica', age: 50, city: 'Cheyenne, WY', img: 'girl148.jpg' },
+      { name: 'Amanda', age: 53, city: 'Pierre, SD', img: 'girl149.jpg' },
+      { name: 'Michelle', age: 44, city: 'Bismarck, ND', img: 'girl150.jpg' },
+      { name: 'Jennifer', age: 46, city: 'Carson City, NV', img: 'girl151.jpg' },
+      { name: 'Lisa', age: 49, city: 'Baton Rouge, LA', img: 'girl152.jpg' },
+      { name: 'Jessica', age: 51, city: 'Annapolis, MD', img: 'girl153.jpg' },
+      { name: 'Amanda', age: 43, city: 'Springfield, IL', img: 'girl154.jpg' },
+      { name: 'Michelle', age: 48, city: 'Hartford, CT', img: 'girl155.jpg' },
+      { name: 'Jennifer', age: 55, city: 'Pierre, SD', img: 'girl156.jpg' },
+      { name: 'Lisa', age: 45, city: 'Jefferson City, MO', img: 'girl157.jpg' },
+      { name: 'Jessica', age: 50, city: 'Montpelier, VT', img: 'girl158.jpg' },
+      { name: 'Amanda', age: 47, city: 'Juneau, AK', img: 'girl159.jpg' },
+      { name: 'Michelle', age: 52, city: 'Oklahoma City, OK', img: 'girl160.jpg' },
+      { name: 'Jennifer', age: 44, city: 'Lincoln, NE', img: 'girl161.jpg' },
+      { name: 'Lisa', age: 49, city: 'Cheyenne, WY', img: 'girl162.jpg' },
+      { name: 'Jessica', age: 51, city: 'Bismarck, ND', img: 'girl163.jpg' },
+      { name: 'Amanda', age: 46, city: 'Carson City, NV', img: 'girl164.jpg' },
+      { name: 'Michelle', age: 54, city: 'Pierre, SD', img: 'girl165.jpg' },
+      { name: 'Jennifer', age: 43, city: 'Baton Rouge, LA', img: 'girl166.jpg' },
+      { name: 'Lisa', age: 48, city: 'Annapolis, MD', img: 'girl167.jpg' },
+      { name: 'Jessica', age: 55, city: 'Springfield, IL', img: 'girl168.jpg' },
+      { name: 'Amanda', age: 45, city: 'Hartford, CT', img: 'girl169.jpg' },
+      { name: 'Michelle', age: 50, city: 'Jefferson City, MO', img: 'girl170.jpg' },
+      { name: 'Jennifer', age: 47, city: 'Montpelier, VT', img: 'girl171.jpg' },
+      { name: 'Lisa', age: 52, city: 'Juneau, AK', img: 'girl172.jpg' },
+      { name: 'Jessica', age: 44, city: 'Oklahoma City, OK', img: 'girl173.jpg' },
+      { name: 'Amanda', age: 49, city: 'Lincoln, NE', img: 'girl174.jpg' },
+      { name: 'Michelle', age: 53, city: 'Cheyenne, WY', img: 'girl175.jpg' },
+      { name: 'Jennifer', age: 46, city: 'Pierre, SD', img: 'girl176.jpg' },
+      { name: 'Lisa', age: 51, city: 'Bismarck, ND', img: 'girl177.jpg' },
+      { name: 'Jessica', age: 43, city: 'Carson City, NV', img: 'girl178.jpg' },
+      { name: 'Amanda', age: 48, city: 'Baton Rouge, LA', img: 'girl179.jpg' },
+      { name: 'Michelle', age: 55, city: 'Annapolis, MD', img: 'girl180.jpg' },
+      { name: 'Jennifer', age: 45, city: 'Springfield, IL', img: 'girl181.jpg' },
+      { name: 'Lisa', age: 50, city: 'Hartford, CT', img: 'girl182.jpg' },
+      { name: 'Jessica', age: 52, city: 'Pierre, SD', img: 'girl183.jpg' },
+      { name: 'Amanda', age: 47, city: 'Jefferson City, MO', img: 'girl184.jpg' },
+      { name: 'Michelle', age: 49, city: 'Montpelier, VT', img: 'girl185.jpg' },
+      { name: 'Jennifer', age: 54, city: 'Juneau, AK', img: 'girl186.jpg' },
+      { name: 'Lisa', age: 42, city: 'Oklahoma City, OK', img: 'girl187.jpg' },
+      { name: 'Jessica', age: 46, city: 'Lincoln, NE', img: 'girl188.jpg' },
+      { name: 'Amanda', age: 51, city: 'Cheyenne, WY', img: 'girl189.jpg' },
+      { name: 'Michelle', age: 44, city: 'Bismarck, ND', img: 'girl190.jpg' },
+      { name: 'Jennifer', age: 48, city: 'Carson City, NV', img: 'girl191.jpg' },
+      { name: 'Lisa', age: 53, city: 'Pierre, SD', img: 'girl192.jpg' },
+      { name: 'Jessica', age: 45, city: 'Baton Rouge, LA', img: 'girl193.jpg' },
+      { name: 'Amanda', age: 50, city: 'Annapolis, MD', img: 'girl194.jpg' },
+      { name: 'Michelle', age: 47, city: 'Springfield, IL', img: 'girl195.jpg' },
+      { name: 'Jennifer', age: 55, city: 'Hartford, CT', img: 'girl196.jpg' },
+      { name: 'Lisa', age: 43, city: 'Jefferson City, MO', img: 'girl197.jpg' },
+      { name: 'Jessica', age: 49, city: 'Montpelier, VT', img: 'girl198.jpg' },
+      { name: 'Amanda', age: 52, city: 'Juneau, AK', img: 'girl199.jpg' },
+      { name: 'Michelle', age: 46, city: 'Oklahoma City, OK', img: 'girl200.jpg' },
+      { name: 'Jennifer', age: 51, city: 'Lincoln, NE', img: 'girl201.jpg' },
+      { name: 'Lisa', age: 44, city: 'Cheyenne, WY', img: 'girl202.jpg' },
+      { name: 'Jessica', age: 48, city: 'Pierre, SD', img: 'girl203.jpg' },
+      { name: 'Amanda', age: 54, city: 'Bismarck, ND', img: 'girl204.jpg' },
+      { name: 'Michelle', age: 45, city: 'Carson City, NV', img: 'girl205.jpg' },
+      { name: 'Jennifer', age: 50, city: 'Baton Rouge, LA', img: 'girl206.jpg' },
+      { name: 'Lisa', age: 47, city: 'Annapolis, MD', img: 'girl207.jpg' },
+      { name: 'Jessica', age: 53, city: 'Springfield, IL', img: 'girl208.jpg' },
+      { name: 'Amanda', age: 42, city: 'Hartford, CT', img: 'girl209.jpg' },
+      { name: 'Michelle', age: 49, city: 'Pierre, SD', img: 'girl210.jpg' },
+      { name: 'Jennifer', age: 55, city: 'Jefferson City, MO', img: 'girl211.jpg' },
+      { name: 'Lisa', age: 46, city: 'Montpelier, VT', img: 'girl212.jpg' },
+      { name: 'Jessica', age: 51, city: 'Juneau, AK', img: 'girl213.jpg' },
+      { name: 'Amanda', age: 43, city: 'Oklahoma City, OK', img: 'girl214.jpg' },
+      { name: 'Michelle', age: 48, city: 'Lincoln, NE', img: 'girl215.jpg' },
+      { name: 'Jennifer', age: 52, city: 'Cheyenne, WY', img: 'girl216.jpg' },
+      { name: 'Lisa', age: 45, city: 'Bismarck, ND', img: 'girl217.jpg' },
+      { name: 'Jessica', age: 50, city: 'Carson City, NV', img: 'girl218.jpg' },
+      { name: 'Amanda', age: 47, city: 'Pierre, SD', img: 'girl219.jpg' },
+      { name: 'Michelle', age: 54, city: 'Baton Rouge, LA', img: 'girl220.jpg' },
+      { name: 'Jennifer', age: 44, city: 'Annapolis, MD', img: 'girl221.jpg' },
+      { name: 'Lisa', age: 49, city: 'Springfield, IL', img: 'girl222.jpg' }
     ];
 
     // ===== GET UNIQUE RANDOM PROFILES =====
